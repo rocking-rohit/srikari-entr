@@ -131,7 +131,7 @@ Please provide more details about this product.`
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
               Welcome to{' '}
               <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-                Srikari Enterprise
+                Srikari Enterprises
               </span>
             </h1>
             
@@ -216,7 +216,7 @@ Please provide more details about this product.`
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Company Info */}
             <div className="text-center md:text-left">
-              <h3 className="text-lg font-semibold mb-4">Srikari Enterprise</h3>
+              <h3 className="text-lg font-semibold mb-4">Srikari Enterprises</h3>
               <p className="text-gray-300">
                 Your trusted partner for quality products and excellent service.
               </p>
