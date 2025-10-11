@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { supabase, Product } from '@/lib/supabase'
-import Link from 'next/link'
 import { MessageCircle, Phone, X } from 'lucide-react'
 
 export default function HomePage() {
@@ -468,7 +467,7 @@ Please provide more details about this product.`
                     placeholder="Add additional details to your message (optional)"
                   />
                   <p className="text-xs text-gray-500 mt-2">
-                    Base message: "Hi, I am [Your Name]. Im intrested in your business, lets get in touch"<br/>
+                    Base message: &quot;Hi, I am [Your Name]. Im intrested in your business, lets get in touch&quot;<br/>
                     Your additional message will be added below this.
                   </p>
                 </div>

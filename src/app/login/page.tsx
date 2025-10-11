@@ -39,23 +39,10 @@ export default function LoginPage() {
         setError(data.error || 'Login failed')
       }
     } catch (error) {
+      console.error('Login error:', error)
       setError('Network error. Please try again.')
     } finally {
       setLoading(false)
-    }
-  }
-
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/auth', {
-        method: 'DELETE',
-      })
-      // Clear token from localStorage
-      localStorage.removeItem('auth-token')
-      router.push('/login')
-      router.refresh()
-    } catch (error) {
-      console.error('Logout error:', error)
     }
   }
 

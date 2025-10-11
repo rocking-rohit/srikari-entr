@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'No token found' }, { status: 401 })
     }
     
-    const decoded = jwt.verify(token, JWT_SECRET) as any
+            const decoded = jwt.verify(token, JWT_SECRET) as { email: string; role: string; iat: number }
     
     if (decoded.email !== ADMIN_EMAIL) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 })

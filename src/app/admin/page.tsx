@@ -27,39 +27,39 @@ export default function AdminPage() {
   })
 
   useEffect(() => {
-    checkAuth()
-  }, [])
-
-  const checkAuth = async () => {
-    try {
-      const token = localStorage.getItem('auth-token')
-      
-      if (!token) {
-        router.push('/login')
-        return
-      }
-
-      const response = await fetch('/api/ping', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`
+    const checkAuth = async () => {
+      try {
+        const token = localStorage.getItem('auth-token')
+        
+        if (!token) {
+          router.push('/login')
+          return
         }
-      })
-      
-      if (response.ok) {
-        setIsAuthenticated(true)
-        fetchProducts()
-      } else {
-        // Clear invalid token and redirect to login
+
+        const response = await fetch('/api/ping', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        
+        if (response.ok) {
+          setIsAuthenticated(true)
+          fetchProducts()
+        } else {
+          // Clear invalid token and redirect to login
+          localStorage.removeItem('auth-token')
+          router.push('/login')
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error)
         localStorage.removeItem('auth-token')
         router.push('/login')
       }
-    } catch (error) {
-      console.error('Auth check failed:', error)
-      localStorage.removeItem('auth-token')
-      router.push('/login')
     }
-  }
+
+    checkAuth()
+  }, [router])
 
   const fetchProducts = async () => {
     try {
