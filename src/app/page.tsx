@@ -6,6 +6,7 @@ import { MessageCircle, Phone, X } from 'lucide-react'
 
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
   const [showWhatsAppForm, setShowWhatsAppForm] = useState(false)
   const [showGetInTouchForm, setShowGetInTouchForm] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
@@ -37,6 +38,8 @@ export default function HomePage() {
       setProducts(data || [])
     } catch (error) {
       console.error('Error fetching products:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -177,7 +180,45 @@ Please provide more details about this product.`
             <p className="text-lg text-gray-600">Explore our collection of high-quality products</p>
           </div>
 
-          {products.length === 0 ? (
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
+                  {/* Image skeleton */}
+                  <div className="h-48 bg-gray-200 relative">
+                    <div className="absolute top-2 right-2 bg-gray-300 rounded-full px-2 py-1 w-16 h-6"></div>
+                  </div>
+                  
+                  {/* Content skeleton */}
+                  <div className="p-4">
+                    {/* Title skeleton */}
+                    <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                    
+                    {/* Description skeleton */}
+                    <div className="space-y-2 mb-4">
+                      <div className="h-4 bg-gray-200 rounded w-full"></div>
+                      <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    </div>
+                    
+                    {/* Price skeleton */}
+                    <div className="flex items-center space-x-2 mb-4">
+                      <div className="h-5 bg-gray-200 rounded w-16"></div>
+                      <div className="h-4 bg-gray-200 rounded w-12"></div>
+                    </div>
+                    
+                    {/* Status and buttons skeleton */}
+                    <div className="flex items-center justify-between">
+                      <div className="h-6 bg-gray-200 rounded-full w-20"></div>
+                      <div className="flex space-x-2">
+                        <div className="h-8 bg-gray-200 rounded w-8"></div>
+                        <div className="h-8 bg-gray-200 rounded w-8"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : products.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-500 text-lg">No products available at the moment.</p>
             </div>
