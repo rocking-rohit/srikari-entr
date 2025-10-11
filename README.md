@@ -1,189 +1,255 @@
-# Srikari Enterprise - Next.js Product Management App
+# Srikari Enterprise - E-commerce Platform
 
-A modern Next.js application with Supabase integration for product management, featuring a public product listing page and an admin dashboard with full CRUD operations.
+A modern Next.js e-commerce platform for Srikari Enterprise, featuring product management, customer inquiries, and admin dashboard.
 
-## Features
+## 🚀 Features
 
-- **Home Page**: Public product listing with responsive design
-- **Admin Dashboard**: Complete CRUD operations for products
-- **Supabase Integration**: Real-time database with PostgreSQL
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **TypeScript**: Full type safety throughout the application
+### Customer Features
+- **Product Catalog**: Browse products with images, descriptions, and pricing
+- **WhatsApp Integration**: Contact via WhatsApp for product inquiries
+- **Responsive Design**: Mobile-friendly interface
+- **Call Integration**: Direct calling functionality
+- **Modern UI**: Beautiful gradient design with Tailwind CSS
 
-## Tech Stack
+### Admin Features
+- **Product Management**: Full CRUD operations for products
+- **Authentication**: Secure JWT-based admin login
+- **Sort Order**: Control product display order
+- **Real-time Updates**: Instant product updates
+- **Mobile Responsive**: Admin panel works on all devices
 
-- **Frontend**: Next.js 14, React, TypeScript
-- **Styling**: Tailwind CSS
-- **Database**: Supabase (PostgreSQL)
-- **Icons**: Lucide React
-- **Deployment**: Vercel (recommended)
+### Technical Features
+- **Next.js 14**: Latest React framework with App Router
+- **Supabase**: Database and authentication
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first CSS framework
+- **JWT Authentication**: Secure admin access
+- **WhatsApp API**: Direct messaging integration
 
-## Database Schema
+## 📦 Installation
 
-The `products` table includes the following fields:
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Supabase account
 
+### Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd srikari-entr
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Setup**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Update `.env.local` with your Supabase credentials:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   JWT_SECRET=your_jwt_secret
+   ADMIN_EMAIL=admin@srikari.com
+   ADMIN_PASSWORD=RaviKiran@786
+   ```
+
+4. **Database Setup**
+   - Run the SQL scripts in Supabase:
+     - `supabase-schema.sql` - Creates the products table
+     - `add-sort-order.sql` - Adds sort order functionality
+     - `stationery-products-realistic.sql` - Adds sample products
+
+5. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Access the Application**
+   - Customer Site: http://localhost:3000
+   - Admin Panel: http://localhost:3000/admin
+   - Login: http://localhost:3000/login
+
+## 🗄️ Database Schema
+
+### Products Table
 ```sql
-- id: UUID (Primary Key)
-- name: VARCHAR(255) (Required)
-- desc: TEXT (Nullable)
-- qty: INTEGER (Required)
-- mrp: DECIMAL(10,2) (Required)
-- offer_price: DECIMAL(10,2) (Required)
-- discount_percent: DECIMAL(5,2) (Required)
-- image1: TEXT (Nullable)
-- image2: TEXT (Nullable)
-- image3: TEXT (Nullable)
-- status: VARCHAR(20) (Required, 'active' or 'inactive')
-- created_at: TIMESTAMP WITH TIME ZONE
-- updated_at: TIMESTAMP WITH TIME ZONE
+CREATE TABLE products (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  qty INTEGER NOT NULL DEFAULT 0,
+  mrp DECIMAL(10,2) NOT NULL,
+  offer_price DECIMAL(10,2) NOT NULL,
+  discount_percent DECIMAL(5,2) NOT NULL DEFAULT 0,
+  image1 TEXT,
+  image2 TEXT,
+  image3 TEXT,
+  status VARCHAR(20) DEFAULT 'active',
+  sort_order INTEGER DEFAULT 0,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
 ```
 
-## Setup Instructions
+## 🔐 Authentication
 
-### 1. Clone and Install Dependencies
+### Admin Login
+- **Email**: admin@srikari.com
+- **Password**: RaviKiran@786
+- **JWT Expiry**: 365 days
+- **Storage**: localStorage
 
-```bash
-cd srikari-entr
-npm install
-```
+### Security Features
+- JWT token verification
+- Client-side authentication checks
+- Protected admin routes
+- Token expiration handling
 
-### 2. Set up Supabase
+## 📱 WhatsApp Integration
 
-1. Create a new project at [supabase.com](https://supabase.com)
-2. Go to Settings → API to get your project URL and anon key
-3. Copy `.env.example` to `.env.local` and update the values:
+### Get in Touch Form
+- **Purpose**: General business inquiries
+- **Fields**: Name, Message (optional)
+- **Default Message**: "Hi, I am {name}. Im intrested in your business, lets get in touch"
+- **Extension**: Custom message added below default
 
-```bash
-cp .env.example .env.local
-```
+### Product Inquiry Form
+- **Purpose**: Specific product inquiries
+- **Fields**: Name, Address, Phone Number
+- **Message**: Includes product details and customer information
 
-Update `.env.local`:
-```
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
+## 🎨 UI/UX Features
 
-### 3. Set up Database
+### Design System
+- **Colors**: Blue gradient theme with green accents
+- **Typography**: Modern font stack
+- **Components**: Reusable React components
+- **Icons**: Lucide React icon library
+- **Animations**: Smooth transitions and hover effects
 
-1. Go to your Supabase project dashboard
-2. Navigate to SQL Editor
-3. Run the SQL from `supabase-schema.sql` to create the products table and sample data
+### Responsive Design
+- **Mobile First**: Optimized for mobile devices
+- **Breakpoints**: sm, md, lg, xl
+- **Flexible Layouts**: Grid and flexbox layouts
+- **Touch Friendly**: Large buttons and touch targets
 
-### 4. Run the Application
+## 📊 Product Management
 
-```bash
-npm run dev
-```
+### Sort Order System
+- **Purpose**: Control product display order
+- **Implementation**: Integer-based sorting
+- **Auto-fill**: New products get next available number
+- **Admin Control**: Easy reordering through admin panel
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+### Product Features
+- **Images**: Up to 3 images per product
+- **Pricing**: MRP, Offer Price, Discount Percentage
+- **Status**: Active/Inactive toggle
+- **Inventory**: Quantity tracking
+- **Descriptions**: Rich product descriptions
 
-## Project Structure
+## 🚀 Deployment
+
+### Vercel (Recommended)
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### Other Platforms
+- **Netlify**: Static site deployment
+- **Railway**: Full-stack deployment
+- **AWS**: EC2 or Lambda deployment
+- **DigitalOcean**: Droplet deployment
+
+## 📁 Project Structure
 
 ```
 srikari-entr/
 ├── src/
 │   ├── app/
-│   │   ├── admin/
-│   │   │   └── page.tsx          # Admin dashboard with CRUD
-│   │   ├── globals.css           # Global styles
-│   │   ├── layout.tsx            # Root layout
-│   │   └── page.tsx              # Home page with product listing
-│   └── lib/
-│       └── supabase.ts           # Supabase client and types
-├── supabase-schema.sql           # Database schema
-├── .env.example                  # Environment variables template
-└── README.md                     # This file
+│   │   ├── admin/          # Admin dashboard
+│   │   ├── api/            # API routes
+│   │   ├── login/          # Login page
+│   │   ├── globals.css     # Global styles
+│   │   └── page.tsx        # Homepage
+│   ├── lib/
+│   │   ├── supabase.ts     # Database client
+│   │   └── auth.ts         # Auth utilities
+│   └── middleware.ts       # Route protection
+├── public/                  # Static assets
+├── supabase-schema.sql     # Database schema
+├── stationery-products-realistic.sql # Sample data
+└── README.md               # This file
 ```
 
-## Usage
+## 🔧 Development
 
-### Home Page (`/`)
-- Displays all active products in a responsive grid
-- Shows product images, names, descriptions, prices, and stock
-- Includes discount badges and status indicators
-- Navigation to admin page
+### Available Scripts
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+```
 
-### Admin Page (`/admin`)
-- **View Products**: Table view of all products with key information
-- **Add Product**: Modal form to create new products
-- **Edit Product**: Click edit icon to modify existing products
-- **Delete Product**: Remove products with confirmation
-- **Toggle Status**: Activate/deactivate products
-- **Real-time Updates**: Changes reflect immediately
+### Code Style
+- **ESLint**: Configured for Next.js
+- **TypeScript**: Strict type checking
+- **Prettier**: Code formatting (optional)
+- **Conventional Commits**: Git commit messages
 
-### Product Management Features
+## 📈 Performance
 
-1. **Create**: Add new products with all required fields
-2. **Read**: View products in both home page and admin table
-3. **Update**: Edit any product field including status
-4. **Delete**: Remove products permanently
-5. **Status Management**: Toggle between active/inactive states
+### Optimizations
+- **Image Optimization**: Next.js Image component
+- **Code Splitting**: Automatic route-based splitting
+- **Static Generation**: Pre-rendered pages
+- **CDN**: Static asset delivery
+- **Caching**: Browser and server-side caching
 
-## API Integration
+### Monitoring
+- **Core Web Vitals**: Performance metrics
+- **Error Tracking**: Client-side error monitoring
+- **Analytics**: User behavior tracking
+- **Uptime**: Service availability monitoring
 
-The app uses Supabase's real-time capabilities:
-- Automatic updates when data changes
-- Optimistic UI updates for better user experience
-- Error handling for all database operations
-
-## Customization
-
-### Adding New Fields
-1. Update the database schema in `supabase-schema.sql`
-2. Update TypeScript types in `src/lib/supabase.ts`
-3. Modify forms in `src/app/admin/page.tsx`
-4. Update display components as needed
-
-### Styling
-- Modify `src/app/globals.css` for global styles
-- Use Tailwind classes throughout components
-- Custom utilities available for text truncation
-
-### Authentication (Future Enhancement)
-The current setup allows public access. To add authentication:
-1. Enable Supabase Auth
-2. Add authentication middleware
-3. Protect admin routes
-4. Add user management
-
-## Deployment
-
-### Vercel (Recommended)
-1. Push code to GitHub
-2. Connect repository to Vercel
-3. Add environment variables in Vercel dashboard
-4. Deploy automatically
-
-### Other Platforms
-- Netlify
-- Railway
-- DigitalOcean App Platform
-
-## Environment Variables
-
-Required environment variables:
-- `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase project URL
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase anonymous key
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test thoroughly
+4. Add tests if applicable
 5. Submit a pull request
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License.
+This project is proprietary software owned by Srikari Enterprise.
 
-## Support
+## 📞 Support
 
-For issues and questions:
-1. Check the Supabase documentation
-2. Review Next.js documentation
-3. Open an issue in the repository
+For technical support or questions:
+- **Email**: admin@srikari.com
+- **Phone**: +91 99850 01278
+- **WhatsApp**: Business inquiries via website
+
+## 🔄 Version History
+
+### v1.0.0 (Current)
+- Initial release
+- Product catalog
+- Admin dashboard
+- WhatsApp integration
+- Authentication system
+- Sort order functionality
+- Responsive design
 
 ---
 
-**Note**: This is a boilerplate application ready for customization. The database includes sample data for testing purposes.
+**Built with ❤️ for Srikari Enterprise**
