@@ -60,7 +60,7 @@ export default function HomePage() {
       ? `${defaultMessage}\n\n${customMessage}`
       : defaultMessage
 
-    const whatsappUrl = `https://wa.me/919985001278?text=${encodeURIComponent(finalMessage)}`
+    const whatsappUrl = `https://wa.me/8317667232?text=${encodeURIComponent(finalMessage)}`
     window.open(whatsappUrl, '_blank')
     
     // Reset form and close modal
@@ -79,7 +79,7 @@ Phone: ${formData.phone}
 
 Please provide more details about this product.`
 
-    const whatsappUrl = `https://wa.me/919985001278?text=${encodeURIComponent(message)}`
+    const whatsappUrl = `https://wa.me/8317667232?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, '_blank')
     
     // Reset form and close modal
@@ -89,7 +89,7 @@ Please provide more details about this product.`
   }
 
   const handleCallClick = () => {
-    window.open('tel:+919985001278', '_blank')
+    window.open('tel:+918317667232', '_blank')
   }
 
   return (
@@ -254,11 +254,11 @@ Please provide more details about this product.`
               <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
               <div className="space-y-3">
                 <a
-                  href="tel:+919985001278"
+                  href="tel:+918317667232"
                   className="flex items-center justify-center md:justify-start space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
                 >
                   <Phone className="h-4 w-4" />
-                  <span>+91 99850 01278</span>
+                  <span>+91 8317667232</span>
                 </a>
                 {/* <button
                   onClick={() => setShowWhatsAppForm(true)}
