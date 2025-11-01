@@ -60,7 +60,7 @@ export default function HomePage() {
       ? `${defaultMessage}\n\n${customMessage}`
       : defaultMessage
 
-    const whatsappUrl = `https://wa.me/8317667232?text=${encodeURIComponent(finalMessage)}`
+    const whatsappUrl = `https://wa.me/918317667232?text=${encodeURIComponent(finalMessage)}`
     window.open(whatsappUrl, '_blank')
     
     // Reset form and close modal
@@ -79,7 +79,7 @@ Phone: ${formData.phone}
 
 Please provide more details about this product.`
 
-    const whatsappUrl = `https://wa.me/8317667232?text=${encodeURIComponent(message)}`
+    const whatsappUrl = `https://wa.me/918317667232?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, '_blank')
     
     // Reset form and close modal
